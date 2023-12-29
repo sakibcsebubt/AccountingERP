@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ebKwgylCdpKLwp+7cYdHbxpL0X7X96tsBFlQEuLslWhwwhIYEWvgEgGVUpXi6JewgzYkyzWPnCiuEnNj3321UQ==",
+  "success": true,
+  "projectFilePath": "E:\\TechnoArt\\ERP.MVCWEB\\MVC.ERPWEB\\MVC.ERPWEB.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TECHNOART\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\TECHNOART\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
+    "C:\\Users\\TECHNOART\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

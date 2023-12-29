@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTables Example</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+</head>
+<body>  
+    <div class="card card-default">
+        <div class="card-header">
+            <h2>Products Inventory</h2>
+        </div>
+        <div class="card-body">
+            <table id="productsTable1" class="table table-hover table-product" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>ParentHead</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var sl = 0;
+
+                        @foreach (var item in Model)
+                        {
+                            sl = sl + 1;
+                            <tr>
+                                <td>@sl</td>
+                                <td>@item.entid</td>
+                                <td>@item.actype</td>
+                                <td>@item.achead</td>
+                                <td>@item.aclevel</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Include DataTables JavaScript -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                var productsTable = $("#productsTable1");
+                if (productsTable.length != 0) {
+                    productsTable.DataTable({
+                        info: true,
+                        lengthChange: true,
+                        lengthMenu: [
+                            [10, 20, 30, 50, -1],
+                            [10, 20, 30, 50, "All"],
+                        ],
+                        scrollX: true,
+                        order: [[2, "asc"]],
+                        columnDefs: [
+                            {
+                                orderable: false,
+                                targets: [0, 4],
+                            },
+                        ],
+                        language: {
+                            search: "_INPUT_",
+                            searchPlaceholder: "Search...",
+                        },
+                    });
+                }
+            });
+        </script>
+    }
+</body>
+</html>

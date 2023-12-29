@@ -1,0 +1,240 @@
+﻿@model MVC.ERPWEB.Models.TodoList.TodoListVM
+
+<style>
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+    }
+
+        /* Adjust the margin to provide some space between the table and the search input */
+        .dataTables_wrapper .dataTables_filter input {
+            margin-right: 10px;
+        }
+
+    #productsTable1 th:nth-child(3),
+    #productsTable1 td:nth-child(3) {
+        width: 50%;
+    }
+</style>
+<div class="card card-default">
+    <div class="card-header">
+        <h2>Task List</h2> <a href="#" class="edit-task btn btn-primary" data-toggle="modal" data-target="#editTaskModal" data-task-id="0"> Add </a>
+    </div>
+    <div class="card-body">
+        <table id="productsTable1" class="table table-hover table-product" style="width:100%;color:black;">
+            <thead>
+                <tr>
+                    <th>SL</th>
+                    <th>ProjectName</th>
+                    <th>Task Name</th>
+                    <th>Parent Task Name</th>
+                    <th>Developer Name</th>
+                    <th>Designation</th>
+                    <th>Expected Time</th>
+                    <th>Working Time</th>
+                    <th>Assign Date</th>
+                    <th>Complete Date</th>
+                    <th>Assigned BY</th>
+                    <th>Working Status</th>
+                    <th>Priority Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var sl = 0;
+                    if (Model.TaskList == null)
+                    {
+                                <tr>
+                                    <td class="text-danger text-center" colspan="14"> No Data Found!</td>
+                                </tr>
+                    }
+                    else
+                    {
+                                @foreach (var item in Model.TaskList)
+                        {
+                            sl = sl + 1;
+                                    <tr>
+                                        <td>@sl</td>
+                                        <td>@item.ProjectName</td>
+                                        <td>@item.TaskName</td>
+                                        <td>@(item.ParentTaskId == -1 ? "" : item.ParentTaskId)</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.Designation</td>
+                                        <td>@item.ExpectedTime</td>
+                                        <td>@item.WorkingTime</td>
+                                        <td>@item.AssignDate</td>
+                                        <td>@item.DueDate</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@(item.WorkingStatusId == 1 ? "Assigned" : "Done")</td>
+                                        <td>@(item.PriorityId == 1 ? "Normal" : "High")</td>
+                                        @*<td><a href="#" class=""><i class='fa fa-edit ml-2'> </i> </a> <i class='fa fa-trash ml-2'> </i></td>*@
+                                        <td>
+                                            <a href="#" class="edit-task" data-toggle="modal" data-target="#editTaskModal" data-task-id="@item.Id">
+                                                <i class='fa fa-edit ml-2'></i>
+                                            </a>
+                                            <i class='fa fa-trash ml-2'></i>
+                                        </td>
+
+                                    </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal for Edit Task -->
+<div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTaskModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="TaskForm">
+                    <div class="form-group">
+                        <label for="TaskName">Task Name</label>
+                        <input type="text" class="form-control" id="TaskName" name="TaskName" />
+                        <input type="hidden" class="form-control" id="Id" name="Id" />
+                    </div>
+                    <div class="form-group">
+                        <label for="parentTaskName">Parent Task Name</label>
+                        <input type="text" class="form-control" id="parentTaskName" name="parentTaskName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="DeveloperId">Developer Name</label>
+                        <select class="form-control" id="DeveloperId" name="DeveloperId">
+                            @if (Model.DeveloperList == null)
+                            {
+                                <option value="0">No Assigned </option>
+                            }
+                            else
+                            {
+                                @foreach (var developer in Model.DeveloperList)
+                                {
+                                    <option value="@developer.Id">@developer.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ExpectedTime">Expected Time</label>
+                        <input type="number" class="form-control" id="ExpectedTime" name="ExpectedTime" />
+                    </div>
+                    <div class="form-group">
+                        <label for="WorkingTime">Working Time</label>
+                        <input type="number" class="form-control" id="WorkingTime" name="WorkingTime" />
+                    </div>
+                    <div class="form-group">
+                        <label for="DueDate">Due Date</label>
+                        <input type="datetime-local" class="form-control" id="DueDate" name="DueDate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="WorkingStatusId">Working Status</label>
+                        <select class="form-control" id="WorkingStatusId" name="WorkingStatusId">
+                            <option value="1">Assigned</option>
+                            <option value="2">In Progress</option>
+                            <option value="3">Done</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include DataTables JavaScript -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            var productsTable = $("#productsTable1");
+
+            if (productsTable.length != 0) {
+                productsTable.DataTable({
+                    lengthMenu: [
+                        [10, 20, 30, 50, -1],
+                        [10, 20, 30, 50, "All"],
+                    ],
+                    scrollX: true,
+                    order: [[2, "asc"]],
+                    // productsTable.column(2).nodes().to$().css('width', '30%'),
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            targets: [0, 4],
+                        },
+                    ],
+                });
+            }
+        });
+
+        $('.edit-task').on('click', function () {
+            var taskId = $(this).data('task-id');
+            // alert(taskId);
+
+            $.ajax({
+                url: '/ToDoList/GetTaskById',
+                data: { Id: taskId },
+                type: 'GET',
+                success: function (data) {
+                    // Populate modal form controls with data
+                    var status = data == "CreteNewTask" ? "Create" : "Edit"; 
+                    $('#editTaskModalLabel').text(status + ' Task');
+                    console.log("Task Data:", data);
+                    $('#Id').val(data[0].id);
+                    $('#TaskName').val(data[0].taskName);
+                    $('#parentTaskName').val(data[0].parentTaskId);
+                    $('#DeveloperName').val(data[0].userName);
+                    $('#ExpectedTime').val(data[0].expectedTime);
+                    $('#WorkingTime').val(data[0].workingTime);
+                    $('#DueDate').val(data[0].dueDate);
+                    $('#WorkingStatus').val(data[0].workingStatusId);
+                },
+                error: function () {
+                    console.error('Error fetching task details.');
+                }
+            });
+        });
+
+        $('#TaskForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/ToDoList/UpdateTask',
+                data: $(this).serialize(),
+                type: 'POST',
+                success: function (data) {
+                    if (data == "Success" || data == "InsertedSuccess") {
+                        $('#editTaskModal').modal('hide');
+                        var massage = data == "InsertedSuccess" ? "Task Created successfully" : "Task updated successfully";
+                        toastr.options.timeOut = 10000; // Set timeOut to 10 seconds
+                        toastr.success('Task updated successfully', "Success");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                    else {
+                        alert("Data Not Updated!");
+                        toastr.error('Failed to update task');
+                    }
+                },
+                error: function () {
+                    console.error('Error updating task details.');
+                }
+            });
+        });
+    </script>
+
+
+
+
+    }

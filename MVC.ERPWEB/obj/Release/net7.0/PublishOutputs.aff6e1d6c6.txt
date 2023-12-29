@@ -1,0 +1,11 @@
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\MVC.ERPWEB.exe
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\appsettings.json
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\MVC.ERPWEB.dll
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\MVC.ERPWEB.deps.json
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\MVC.ERPWEB.runtimeconfig.json
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\MVC.ERPWEB.pdb
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\Newtonsoft.Json.dll
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\System.CodeDom.dll
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\System.Management.dll
+E:\TechnoArt\ERP.MVCWEB\MVC.ERPWEB\obj\Release\net7.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Management.dll

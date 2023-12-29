@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\Publish\GrpERPWeb</_PublishTargetUrl>
+    <History>True|2023-11-24T19:29:58.7727553Z;False|2023-11-25T01:29:13.7611094+06:00;True|2023-11-22T01:16:59.1382085+06:00;True|2023-11-21T02:30:23.6251258+06:00;True|2023-11-21T02:28:53.3052788+06:00;True|2023-11-21T02:28:08.9042800+06:00;True|2023-11-21T01:57:04.8646482+06:00;True|2023-11-21T01:25:14.3693389+06:00;True|2023-11-21T01:08:27.6823458+06:00;True|2023-11-21T01:07:09.7334055+06:00;True|2023-11-21T01:06:16.1068100+06:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

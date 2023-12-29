@@ -1,0 +1,618 @@
+﻿@model MVC.ERPWEB.Models.VoucherEntry.VoucherEntryVM.VoucherEntryViewModel
+<div class="card card-default">
+    <div class="card-header">
+        <h2>Voucher Entry</h2>
+    </div>
+    <div class="card-body">
+        <div class="collapse" id="collapse-basic-input-group">
+        </div> 
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-dark" for="voucherType">Voucher Type </label>
+                    </div>
+                    <select class="custom-select" id="voucherType">
+
+                        @foreach (var VType in Model.VoucherList)
+                        {
+                            <option value="@VType.Code">@VType.Name</option>
+                        } 
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-dark" for="branch">Branch </label>
+                    </div>
+                    <select class="custom-select" id="vcrAdvice">
+                        <option selected disabled>Choose...</option>
+                        @foreach (var VType in Model.BranchList)
+                        {
+                            <option value="@VType.Sectid">@VType.Sectsdesc</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text text-dark" for="voucherDateChecked">Voucher Date</label>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <label class="control control-checkbox d-inline-block mb-0">
+                                        <input type="checkbox" name="voucherDateChecked" id="voucherDateChecked" />
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="date" class="form-control" id="voucherDate" aria-label="Text input with checkbox">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-dark" for="refNo">Ref. No.(if any) </label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="referanceNo" aria-label="" aria-describedby="" id="refNo">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-dark" for="voucherno">Voucher. No </label>
+                    </div>
+                    <label for="" class="form-control border-0"><b class="vcrNo1">XXVMM-CCCC-XXXXX</b> </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                @* 2nd Row last column space  *@
+                <a class="btn btn-success" id="okButton">OK</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text text-dark" for="voucherno">Narration (if any)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="voucherNaration" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text text-dark" for="voucherNo">Voucher. No</label>
+                    </div>
+                    <label for="" class="form-control border-0" id="voucherNo"><b class="vcrNo1">XXVMM-CCCC-XXXXX</b></label>
+                </div>
+            </div>
+        </div>
+        <div class="d-none" id="parttwo">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text text-dark" for="sourceCash">Source Cash </label>
+                        </div>
+                        <select class="custom-select" id="sourceCash">
+                            <option selected>Choose...</option> 
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="advice">Advice</span>
+                        </div>
+                        <input type="text" class="form-control" id="advice" name="advice" />
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-5 border-top"> </div>
+            @* Second Region *@
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text text-dark" for="accountHead">Account Head </label>
+                        </div>
+                        <select class="custom-select" id="accountHead">
+                            <option selected>Choose...</option>
+                            @foreach (var item in Model.EntAccountCodeBook)
+                            {
+                                <option value="@item.Accid">@item.AcHead</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text text-dark" for="location">Location </label>
+                        </div>
+                        <select class="custom-select" id="location">
+                            <option selected>Choose...</option>
+                            @foreach (var item in Model.EntLocationList)
+                            {
+                                <option value="@item.Sectid">@item.Sectsdesc</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="subHead">Sub Head </label>
+                                </div>
+                                <select class="custom-select" id="subHead">
+                                    <option selected>Choose...</option>
+                                    @foreach (var item in Model.EntAccountCodeBook)
+                                    {
+                                        <option value="@item.Accid">@item.AcHead</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3 d-none" id="quantity" >
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="quantity">Quantity </label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Quantity" name="quantity" id="inputQuantity">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3 d-none" id="rate">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="rate">Rate</label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Rate" name="rate" id="inputRate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="subHead2">Sub Head-2 </label>
+                                </div>
+                                <select class="custom-select" id="subHead2">
+                                    <option selected>Choose...</option>
+                                    @foreach (var item in Model.EntAccountCodeBook)
+                                    {
+                                        <option value="@item.Accid">@item.AcHead</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @*  <div class="row">
+                    <div class="col-md-6">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <label class="input-group-text text-dark" for="quantity">Quantity </label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Quantity" name="quantity">
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    <label class="input-group-text text-dark" for="rate">Rate</label>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Rate" name="rate">
+                    </div>
+                    </div>
+                    </div> *@
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row float-right mr-5">
+                        <div class="col-md-6">
+                            <div class="custom-control custom-checkbox d-inline-block mr-3 mt-2">
+                                <input type="checkbox" class="custom-control-input" id="chkSubHead" >
+                                <label class="custom-control-label" for="chkSubHead">Sub Head</label>
+                            </div>
+                            <div class="custom-control custom-checkbox d-inline-block mr-3">
+                                <input type="checkbox" class="custom-control-input" id="chkQuantity" onclick="QuantityCheckBox()">
+                                <label class="custom-control-label" for="chkQuantity">Quantity</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox d-inline-block mr-3">
+                                <input type="checkbox" class="custom-control-input" id="ChkSubHead2">
+                                <label class="custom-control-label" for="ChkSubHead2">Sub Head-2</label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="vcrRemrks">Remarks (if any) </label>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Remarks" aria-label="" aria-describedby="" id="vcrRemrks">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text text-dark" for="voucherAmount">Amount </label>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Amount" name="voucherAmount">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select class="custom-select" id="debitOrCredit">
+                                        <option value="debit">Debit</option>
+                                        <option value="credit">Credit</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 mb-6">
+                                        <div class="card-body p-0">
+                                            <button class="ladda-button btn btn-primary btn-ladda" data-style="expand-right" id="btnAdd">
+                                                <span class="ladda-label">ADD!</span>
+                                                <span class="ladda-spinner"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-5 border-top">
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="p-3 mb-2 bg-success text-white">
+                                <th>SL</th>
+                                <th>Account Head</th>
+                                <th>Location</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Rate</th>
+                                <th>Debit</th>
+                                <th>Credit</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Account Code Head</td>
+                                <td>Ho-Head</td>
+                                <td>12</td>
+                                <td>PCS</td>
+                                <td>55.55</td>
+                                <td>55.55</td>
+                                <td></td>
+                                <td>Comment Dal Do</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementById('voucherDateChecked');
+            var voucherDate = document.getElementById('voucherDate');
+
+            function updateDate() {
+                var today = new Date();
+                var day = today.getDate().toString().padStart(2, '0');
+                var month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
+                var year = today.getFullYear();
+                var todayFormatted = `${year}-${month}-${day}`;
+                voucherDate.value = todayFormatted;
+            }
+
+            // Call the function to set the initial date
+            updateDate();
+
+            // Add an event listener to the checkbox
+            checkbox.addEventListener('change', function () {
+                voucherDate.disabled = !checkbox.checked;
+                updateDate();
+            });
+        });
+
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#okButton').click(function () {
+                $("#okButton").prop("readonly", false);
+                var vcrNo = $('#voucherType').val();
+                alert(vcrNo)
+
+                // Make an AJAX request to your server-side endpoint
+                $.ajax(
+                    {
+                        type: "POST", //HTTP POST Method
+                        url: "/Accounts/GetCashHead", // Controller/View
+                        data: { voucherno: vcrNo },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            var options = ""
+                            for (var i = 0; i < data.length; i++) {
+                                options += "<option value='" + data[i].accId + "'>" + data[i].acHead + "</option>"
+                            }
+                            $("#sourceCash").empty().append(options);
+                            // $("#srcCash1").select2();
+                            //  console.log(options);
+                        }
+                    });
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("okButton").addEventListener("click", function () { 
+            // Toggle the visibility of the element
+            var element = document.getElementById("parttwo");
+            element.classList.toggle("d-none");
+            var button = document.getElementById("okButton");
+            button.textContent = button.textContent === "OK" ? "New" : "OK";
+        });
+
+        $("#accountHead").on("change", function () {
+            //alert($("#actdesc").val());
+            var AtxtActCode = $("#accountHead").val();
+            $.ajax(
+                {
+                    type: "POST", //HTTP POST Method
+                    url: "/Accounts/AtxtActCode_SelectChanges", // Controller/View
+                    data: {
+                        AtxtActCode: AtxtActCode,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        // console.log(data);
+                        if (data == "true") {
+                            // $(".lblLevel2").text("2");
+                            // $("#chkSubHead").prop('checked', true);
+                            // $(".colSubHead").removeClass("d-none");
+                            getItemSirdesc();
+                        } else {
+                            $(".lblLevel2").text("");
+                            $(".colSubHead").addClass("d-none");
+                            $("#chkSubHead").prop('checked', false);
+
+                        }
+                    }
+                });
+        })
+
+        function getItemSirdesc() {
+
+            $.ajax(
+                {
+                    type: "GET", //HTTP POST Method
+                    url: "/Accounts/GetItemSirdesc", // Controller/View
+                    dataType: 'json',
+                    success: function (data) {
+                        // console.log(data);
+                        var options = "<option value='' selected disabled>-- Select Sub Head --</option>"
+                        for (var i = 0; i < data.length; i++) {
+                            options += "<option value='" + data[i].sircode + "'>" + data[i].sirdesc1 + "</option>"
+                        }
+                        $("#subHead1").empty().append(options);
+                        $("#subHead1").select2();
+                    }
+                });
+        }
+        function QuantityCheckBox(){
+            var checkbox = document.getElementById("chkQuantity");
+            var quantityElement = $("#quantity");
+            var rateElement = $("#rate");
+
+            if (checkbox.checked) {
+                quantityElement.removeClass("d-none");
+                rateElement.removeClass("d-none");
+                $("#inputQuantity").prop("readonly", false);
+                $("#inputRate").prop("readonly", false);
+            } else {
+                quantityElement.addClass("d-none");
+                rateElement.addClass("d-none");
+                $("#inputQuantity").prop("readonly", true)
+                $("#inputRate").prop("readonly", true)
+            }
+            $("#inputQuantity").val("");
+            $("#inputRate").val("");
+
+        }
+
+
+        $("#btnAdd").on("click", function (e) {
+
+            var dpstCashVal = $("#sourceCash").val();
+            var acHeadVal = $("#accountHead").val();
+
+            //   alert(vcrcod + brncod);
+
+
+            var vcrcod = $("#voucherType").val();
+            var brncod = $("#branch").val();
+           // alert(vcrcod + brncod);
+
+
+            var vcrAdvice = $("#vcrAdvice").val();
+            // var vcrChkNo = $("#vcrChkNo").val();
+            var vcrRef1 = $("#refNo").val();
+            var dtpVoucher1 = $("#voucherDate").val();
+            var vcrNarr1 = $("#voucherNaration").val();
+            var vcrAmt = $("#voucherAmount").val();
+            var vcrQty = $("#inputQuantity").val();
+            var cmbDrCr = $("#debitOrCredit").val();
+            var vcrsectcod2Val = $("#location").val();
+            var subHead1 = $("#subHead").val();
+            var vcrRemrks1 = $("#vcrRemrks").val();
+            // var lblVouNo = $(".voucherNo").text();
+            // var lblSlNo = $(".lblLevel2").text();
+
+            // emptyValueCheck("vcrAmt", "Amount Field Can't be empty!!");
+            // emptyValueCheck("actdesc", "Account Head Can't be empty!!");
+
+
+
+
+
+            // $("#btnUpdate1").prop("readonly", false);
+            // $("#btnUpdate1").removeClass("d-none");
+            // $(".cardAddedVoucher1").removeClass("d-none");
+            // $('#tblAddedVoucher1 tbody').empty();
+
+            //  var vcrNo1 = $("#vcrNo1").val();
+
+            if (dpstCashVal == 'duplicate' || acHeadVal == 'duplicate') {
+                alert("duplicate");
+                return;
+            }
+            var i = 1;
+
+            var dpstCash = $("#sourceCash option:selected").text();
+            var acHead = $("#accountHead option:selected").text();
+            var vcrsectcod2Desc = vcrsectcod2Val + "-" + $("#location option:selected").text();
+            var subHead1Desc = subHead1 + " - " + $("#subHead option:selected").text();
+            alert(subHead1Desc)
+            $.ajax(
+                {
+                    type: "POST", //HTTP POST Method
+                    url: "/Accounts/AddVoucherToTable", // Controller/View
+                    data: {
+                        cmbDrCr: cmbDrCr,
+                        txtAmt: vcrAmt,
+                        txtQty: vcrQty,
+                        cmbVouType: vcrcod, // voucher tyoe
+                        AtxtCactCode: dpstCashVal, // source cash code
+                        AtxtCactCodeValue: dpstCash, // cource cash code + value
+                        AtxtSectCod: vcrsectcod2Val, // location code
+                        AtxtSectCodValue: vcrsectcod2Desc, // location code + value
+                        AtxtActCode: acHeadVal, // account head code
+                        AtxtActCodeValue: acHead, // account head code + value
+                        AutoCompleteSirCode: subHead1, // sub head code
+                        AutoCompleteSirCodeValue: subHead1Desc, // sub head code + value
+                        // lblSlNo: lblSlNo, // label no when selected a account head
+                        AutoCompleteSirCode2Text: "",
+                        remarks: vcrRemrks1
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        // alert(1);
+                        $("#tblAddedVoucher1 tbody").empty();
+                        var z = 1;
+                        var tr = "";
+                        for (var i = 0; i < data.length; i++) {
+
+                            var cramt1 = data[i].trnam == data[i].cramt ? data[i].cramt : "";
+                            var dramt1 = data[i].trnam == data[i].dramt ? data[i].dramt : "";
+                            cramt1 = cramt1 == 0 ? "" : cramt1;
+                            dramt1 = dramt1 == 0 ? "" : dramt1;
+                            console.log("cr" + cramt1)
+                            console.log("dr" + dramt1)
+                            tr += "<tr><td>" + z + "</td><td> " + data[i].trnDesc + "	</td><td>" + data[i].sectcodDesc + "</td><td>" + dramt1 + "</td><td>" + cramt1 + "</td><td>" + data[i].trnrmrk + "</td></tr>"
+
+                            z++;
+                        }
+
+                        $("#tblAddedVoucher1 tbody").append(tr);
+                        // alert(2)
+                        return;
+                    }
+                });
+
+            // $("#btnUpdate1").on("click", function () {
+            //     //  vcrAdvice = vcrAdvice == null ? "" : vcrAdvice;
+            //     $.ajax(
+            //         {
+            //             type: "POST", //HTTP POST Method
+            //             url: "/Accounts/UpdateVoucherTable", // Controller/View
+            //             data: {
+            //                 cmbVouType: vcrcod, // voucher tyoe
+            //                 lblVouNo: lblVouNo, // voucher tyoe
+            //                 AtxtCactCode: dpstCashVal, // source cash code
+            //                 txtVouNar: vcrNarr1,
+            //                 txtAdvice: vcrAdvice,
+            //                 vouRef1: vcrRef1,
+            //                 VouBrn: brncod,
+            //                 vouDate1: dtpVoucher1,
+            //                 cmbCheqNo: vcrChkNo,
+            //             },
+            //             dataType: 'json',
+            //             success: function (data) {
+            //                 //   console.log(data);
+            //                 $(".vcrNo1").text(data)
+            //                 $(".first_row :input").prop("readonly", true);
+            //                 $(".second_row :input").prop("readonly", true);
+            //                 $("#vcrtype").prop("disabled", true);
+            //                 $("#sectcod").prop("disabled", true);
+            //                 $("#btnUpdate1").prop("disabled", true);
+            //                 $("#btnAdd1").prop("disabled", true);
+
+            //                 $("#srcCash1").prop("disabled", true);
+            //                 $("#actdesc").prop("disabled", true);
+            //                 $("#vcrsectcod2").prop("disabled", true);
+            //                 $(".form-check :input").prop("disabled", true);
+            //             }
+            //         });
+            // })
+
+
+
+        })
+    </script>
+    }

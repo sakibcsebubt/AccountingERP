@@ -11,12 +11,22 @@ namespace MVC.ERPWEB.Controllers
         private readonly IConfiguration configuration;
         private readonly string dbName;
         private List<ChartOfAccountModel> CactcodeList = new();
-        private List<AcInfCodeBook> ActcodeList = new();
+        private static List<AccCodeBookModel> ActcodeList = new();
         public AccountsController(IConfiguration _configuration)
         {
             configuration = _configuration;
             dbName = configuration["DatabaseName"] ?? "LIVEERPDB";
+            LoadAccountModule();
         }
+
+        public async void LoadAccountModule() 
+        {
+            if (ActcodeList.Count == 0)
+                ActcodeList = await CommonHelper.GetAccountCodeBookList();
+        }
+
+
+
         public IActionResult Index()
         {
             return View();
@@ -28,7 +38,8 @@ namespace MVC.ERPWEB.Controllers
             var testCode = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("CompanyInfo")["EnterpriseCode"];
             VoucherEntryViewModel model = new();
             model.VoucherList = ApiCommonClasses.StaticList.VoucherList();
-            model.BranchList = await GetBranchlist(EntCode, "2"); 
+            model.BranchList = await GetBranchlist(EntCode, "2");  
+            model.EntAccountCodeBook = ActcodeList;  
             model.ChartOfAccountList = await CommonHelper.GetChartOfAccountsList(); 
             return View(model);
         }

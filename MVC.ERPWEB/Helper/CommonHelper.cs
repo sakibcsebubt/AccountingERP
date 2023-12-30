@@ -98,6 +98,45 @@ namespace MVC.ERPWEB.Helper
 
             var AccountCodeBookList = AppCustomFunctions.JsonStringToList<AccCodeBookModel>(JsonDs1a, "Table");  
             return AccountCodeBookList;
-        } 
+        }
+        
+        public async static Task<List<LocationModel>> GetEntLocationList()
+        {
+            var pap1 = new ApiAccessParms
+            {
+                EntID = "2501", 
+                ProcName = "dbo.SP_LE_REPORT_CODEBOOK_01",
+                ProcID = "LOCATIONLIST01",
+                parm01 = "%",
+                parm02 = "1234"
+            };
+            //var pap1 = vmCfg1.SetParamSirInfCodeBook(AspSession.Current.CompInfList[0].comcpcod, "[0123458][0-9]%", "12345");
+            var dbName = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionInfo")["PrimaryDBName"];
+            string JsonDs1a = await WebProcessAccess.GetGerpAppJsonData(pap1, dbName ?? "LIVEERPDB");
+            if (JsonDs1a == null)
+                return null; 
+
+            var LocationList = AppCustomFunctions.JsonStringToList<LocationModel>(JsonDs1a, "Table");  
+            return LocationList;
+        }
+        public async static Task<List<LocationModel>> GetBranchlist(string EntCode, string Level)
+        {
+            var pap1 = new ApiAccessParms
+            {
+                EntID = EntCode ?? "0000",
+                ProcName = "dbo.SP_LE_REPORT_CODEBOOK_01",
+                ProcID = "LOCATIONLIST01",
+                parm01 = "%",  // Branchcode 
+                parm02 = Level ?? "%"
+
+            };
+            var dbName = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionInfo")["PrimaryDBName"];
+            string JsonDs1a = await WebProcessAccess.GetGerpAppJsonData(pap1, dbName ?? "LIVEERPDB");
+            if (JsonDs1a == null)
+                return null;
+
+            var BranchList = AppCustomFunctions.JsonStringToList<LocationModel>(JsonDs1a, "Table"); 
+            return BranchList;
+        }
     }
 }

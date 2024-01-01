@@ -307,7 +307,7 @@
 
             <div class="pt-5 border-top">
                 <div class="row">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tblAddedVoucher">
                         <thead>
                             <tr class="p-3 mb-2 bg-success text-white">
                                 <th>SL</th>
@@ -323,7 +323,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1.</td>
+                         @*        <td>1.</td>
                                 <td>Account Code Head</td>
                                 <td>Ho-Head</td>
                                 <td>12</td>
@@ -331,7 +331,7 @@
                                 <td>55.55</td>
                                 <td>55.55</td>
                                 <td></td>
-                                <td>Comment Dal Do</td>
+                                <td>Comment Dal Do</td> *@
                             </tr>
                         </tbody>
                     </table>
@@ -553,7 +553,7 @@
                     success: function (data) {
                         console.log(data);
                         // alert(1);
-                        $("#tblAddedVoucher1 tbody").empty();
+                        $("#tblAddedVoucher tbody").empty();
                         var z = 1;
                         var tr = "";
                         for (var i = 0; i < data.length; i++) {
@@ -564,12 +564,12 @@
                             dramt1 = dramt1 == 0 ? "" : dramt1;
                             console.log("cr" + cramt1)
                             console.log("dr" + dramt1)
-                            tr += "<tr><td>" + z + "</td><td> " + data[i].trnDesc + "	</td><td>" + data[i].sectcodDesc + "</td><td>" + dramt1 + "</td><td>" + cramt1 + "</td><td>" + data[i].trnrmrk + "</td></tr>"
+                            tr += "<tr><td>" + z + "</td><td> " + data[i].trnDesc + "	</td><td>" + data[i].sectcodDesc + "</td><td>" + data[i].dramt1 + "</td><td>" + data[i].cramt1 + "</td><td>" + data[i].trnrmrk + "</td></tr>"
 
                             z++;
                         }
 
-                        $("#tblAddedVoucher1 tbody").append(tr);
+                        $("#tblAddedVoucher tbody").append(tr);
                         // alert(2)
                         return;
                     }

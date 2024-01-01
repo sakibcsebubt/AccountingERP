@@ -94,7 +94,7 @@ namespace MVC.ERPWEB.Controllers
 
         public async Task<IActionResult> GetCashHead(string voucherno)
         {
-            var data = await BindControlCode(voucherno);
+            var data = await VoucherWiseSourchCashHead(voucherno);
 
             if (data != null)
             {
@@ -106,7 +106,7 @@ namespace MVC.ERPWEB.Controllers
             }
         }
 
-        public async Task<List<ChartOfAccountModel>> BindControlCode(string vounum)
+        public async Task<List<ChartOfAccountModel>> VoucherWiseSourchCashHead(string vounum)
         {
             try
             {

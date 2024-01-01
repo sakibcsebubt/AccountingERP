@@ -117,16 +117,14 @@ namespace MVC.ERPWEB.Controllers
                 if (!vounum.Contains("JV") && !vounum.Contains("OP"))
                 {
                     List<ChartOfAccountModel>? CactcodeList1a = new();
-                    switch (vounum.Substring(0, 3))
+                    switch (vounum.Substring(0, 1))
                     {
-                        case "RVC":
-                        case "PVC":
-                            CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 4) == "1010");
+                        case "P": 
+                            CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 5) == "12198");
                             //   this.lblCactCodeTitle.Content = (vounum.Contains("PVC") ? "_Source" : "Depo_sit") + " Cash";
                             break;
-                        case "RVB":
-                        case "PVB":
-                            CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 4) == "1902" || x.AccId.Substring(0, 4) == "2902");
+                        case "R": 
+                            CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 5) == "12199" || x.AccId.Substring(0, 5) == "22199");
                             //  this.lblCactCodeTitle.Content = (vounum.Contains("PVB") ? "_Source" : "Depo_sit") + " Bank";
                             break;
                         case "FTV":

@@ -138,7 +138,7 @@
                             <option selected>Choose...</option>
                             @foreach (var item in Model.EntAccountCodeBook)
                             {
-                                <option value="@item.Accid">@item.AcHead</option>
+                                <option value="@item.Accid">@item.Accid - @item.AcHead</option>
                             }
                         </select>
                     </div>
@@ -199,7 +199,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+         @*    <div class="row">
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-2"></div>
@@ -220,26 +220,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    @*  <div class="row">
-                    <div class="col-md-6">
-                    <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                    <label class="input-group-text text-dark" for="quantity">Quantity </label>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Quantity" name="quantity">
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                    <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                    <label class="input-group-text text-dark" for="rate">Rate</label>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Rate" name="rate">
-                    </div>
-                    </div>
-                    </div> *@
+                
                 </div>
-            </div>
+            </div> *@
 
             <div class="row">
                 <div class="col-md-8">
@@ -254,11 +237,10 @@
                                 <label class="custom-control-label" for="chkQuantity">Quantity</label>
                             </div>
 
-                            <div class="custom-control custom-checkbox d-inline-block mr-3">
+                            @* <div class="custom-control custom-checkbox d-inline-block mr-3">
                                 <input type="checkbox" class="custom-control-input" id="ChkSubHead2">
-                                <label class="custom-control-label" for="ChkSubHead2">Sub Head-2</label>
-
-                            </div>
+                                <label class="custom-control-label" for="ChkSubHead2">Sub Head-2</label> 
+                            </div> *@
                         </div>
                         <div class="col-md-6">
                             <div class="input-group mb-3">
@@ -277,7 +259,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text text-dark" for="voucherAmount">Amount </label>
                                 </div>
-                                <input type="number" class="form-control" placeholder="Amount" name="voucherAmount">
+                                <input type="number" class="form-control" placeholder="Amount" id="voucherAmount">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -376,7 +358,12 @@
             $('#okButton').click(function () {
                 $("#okButton").prop("readonly", false);
                 var vcrNo = $('#voucherType').val();
-                alert(vcrNo)
+                var button = document.getElementById("okButton");
+
+                if (button.textContent === "OK")
+                    return false;
+                // alert(vcrNo)
+
 
                 // Make an AJAX request to your server-side endpoint
                 $.ajax(
@@ -389,7 +376,7 @@
                             console.log(data);
                             var options = ""
                             for (var i = 0; i < data.length; i++) {
-                                options += "<option value='" + data[i].accId + "'>" + data[i].acHead + "</option>"
+                                options += "<option value='" + data[i].accId + "'>" + data[i].accId + " - " + data[i].acHead + "</option>"
                             }
                             $("#sourceCash").empty().append(options);
                             // $("#srcCash1").select2();
@@ -450,7 +437,7 @@
                             options += "<option value='" + data[i].sircode + "'>" + data[i].sirdesc1 + "</option>"
                         }
                         $("#subHead1").empty().append(options);
-                        $("#subHead1").select2();
+                        // $("#subHead1").select2();
                     }
                 });
         }
@@ -500,15 +487,26 @@
             var vcrsectcod2Val = $("#location").val();
             var subHead1 = $("#subHead").val();
             var vcrRemrks1 = $("#vcrRemrks").val();
+
+            console.log(dpstCashVal, 'dpstCashVal');
+            console.log(acHeadVal, 'acHeadVal');
+            console.log(vcrcod, 'vcrcod');
+            console.log(brncod, 'brncod');
+            console.log(vcrAdvice, 'vcrAdvice');
+            console.log(vcrRef1, 'vcrRef1');
+            console.log(vcrNarr1, 'vcrNarr1');
+            console.log(vcrAmt, 'vcrAmt');
+            console.log(vcrQty, 'vcrQty');
+            console.log(cmbDrCr, 'cmbDrCr');
+            console.log(vcrsectcod2Val, 'vcrsectcod2Val');
+            console.log(subHead1, 'subHead1');
+            console.log(vcrRemrks1, 'vcrRemrks1');
             // var lblVouNo = $(".voucherNo").text();
             // var lblSlNo = $(".lblLevel2").text();
 
             // emptyValueCheck("vcrAmt", "Amount Field Can't be empty!!");
             // emptyValueCheck("actdesc", "Account Head Can't be empty!!");
-
-
-
-
+             
 
             // $("#btnUpdate1").prop("readonly", false);
             // $("#btnUpdate1").removeClass("d-none");
@@ -551,7 +549,7 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log(data);
+                        console.log(data,'Voucher Table Data ');
                         // alert(1);
                         $("#tblAddedVoucher tbody").empty();
                         var z = 1;
@@ -564,7 +562,7 @@
                             dramt1 = dramt1 == 0 ? "" : dramt1;
                             console.log("cr" + cramt1)
                             console.log("dr" + dramt1)
-                            tr += "<tr><td>" + z + "</td><td> " + data[i].trnDesc + "	</td><td>" + data[i].sectcodDesc + "</td><td>" + data[i].dramt1 + "</td><td>" + data[i].cramt1 + "</td><td>" + data[i].trnrmrk + "</td></tr>"
+                            tr += "<tr><td>" + z + "</td><td> " + data[i].trnDesc + "	</td><td>" + data[i].sectcodDesc + "</td><td>" + data[i].trnqty + "</td><td>PCS</td><td>" + data[i].trnrate + "</td><td>" + data[i].dramt + "</td><td>" + data[i].cramt + "</td><td>" + data[i].trnrmrk + "</td></tr>"
 
                             z++;
                         }

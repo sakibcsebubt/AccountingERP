@@ -38,6 +38,7 @@ namespace MVC.ERPWEB.Controllers
 
         public async Task<IActionResult> VoucherEntry() 
         {
+            ListVouTable = new();
             var EntCode = configuration.GetSection("CompanyInfo")["EnterpriseCode"];
             var testCode = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("CompanyInfo")["EnterpriseCode"];
             VoucherEntryViewModel model = new();
@@ -117,13 +118,15 @@ namespace MVC.ERPWEB.Controllers
                 if (!vounum.Contains("JV") && !vounum.Contains("OP"))
                 {
                     List<ChartOfAccountModel>? CactcodeList1a = new();
-                    switch (vounum.Substring(0, 1))
+                    switch (vounum.Substring(0, 2))
                     {
-                        case "P": 
+                        case "CP": 
+                        case "CR":
                             CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 5) == "12198");
                             //   this.lblCactCodeTitle.Content = (vounum.Contains("PVC") ? "_Source" : "Depo_sit") + " Cash";
                             break;
-                        case "R": 
+                        case "BR": 
+                        case "BP":
                             CactcodeList1a = this.CactcodeList.FindAll(x => x.AccId.Substring(0, 5) == "12199" || x.AccId.Substring(0, 5) == "22199");
                             //  this.lblCactCodeTitle.Content = (vounum.Contains("PVB") ? "_Source" : "Depo_sit") + " Bank";
                             break;

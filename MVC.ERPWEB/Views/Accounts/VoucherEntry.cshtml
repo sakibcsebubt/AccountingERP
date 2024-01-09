@@ -26,8 +26,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text text-dark" for="branch">Branch </label>
                     </div>
-                    <select class="custom-select" id="vcrAdvice">
-                        <option selected disabled>Choose...</option>
+                    <select class="custom-select" id="vcrAdvice"> 
                         @foreach (var VType in Model.BranchList)
                         {
                             <option value="@VType.Sectid">@VType.Sectsdesc</option>
@@ -163,16 +162,16 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 d-none" id="dsubHead">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text text-dark" for="subHead">Sub Head </label>
                                 </div>
                                 <select class="custom-select" id="subHead">
-                                    <option selected>Choose...</option>
-                                    @foreach (var item in Model.EntAccountCodeBook)
+                                    @* <option selected>Choose...</option> *@
+                                  @*   @foreach (var item in Model.EntAccountCodeBook)
                                     {
                                         <option value="@item.Accid">@item.AcHead</option>
-                                    }
+                                    } *@
                                 </select>
                             </div>
                         </div>
@@ -229,7 +228,7 @@
                     <div class="row float-right mr-5">
                         <div class="col-md-6">
                             <div class="custom-control custom-checkbox d-inline-block mr-3 mt-2">
-                                <input type="checkbox" class="custom-control-input" id="chkSubHead" >
+                                <input type="checkbox" class="custom-control-input" id="chkSubHead" onclick="SubHeadCheckBox()">
                                 <label class="custom-control-label" for="chkSubHead">Sub Head</label>
                             </div>
                             <div class="custom-control custom-checkbox d-inline-block mr-3">
@@ -407,15 +406,20 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        // console.log(data);
+                        console.log('Select Changes Restult: ', data); 
                         if (data == "true") {
+                            // var subHeadElement = $("#dsubHead");
+                            $("#dsubHead").removeClass("d-none");
+                            $("#subHead").prop("readonly", false);
                             // $(".lblLevel2").text("2");
-                            // $("#chkSubHead").prop('checked', true);
+                            $("#chkSubHead").prop('checked', true);
                             // $(".colSubHead").removeClass("d-none");
                             getItemSirdesc();
                         } else {
-                            $(".lblLevel2").text("");
-                            $(".colSubHead").addClass("d-none");
+                            $("#dsubHead").addClass("d-none"); 
+                            $("#subHead").prop("readonly", true); 
+                            $("#subHead").text("");
+                            $(".lblLevel2").text(""); 
                             $("#chkSubHead").prop('checked', false);
 
                         }
@@ -431,16 +435,17 @@
                     url: "/Accounts/GetItemSirdesc", // Controller/View
                     dataType: 'json',
                     success: function (data) {
-                        // console.log(data);
+                        console.log('GetSirItem Description: ',data);
                         var options = "<option value='' selected disabled>-- Select Sub Head --</option>"
                         for (var i = 0; i < data.length; i++) {
-                            options += "<option value='" + data[i].sircode + "'>" + data[i].sirdesc1 + "</option>"
+                            options += "<option value='" + data[i].accid + "'>" + data[i].accid + ' - ' + data[i].acHead + "</option>"
                         }
-                        $("#subHead1").empty().append(options);
+                        $("#subHead").empty().append(options);
                         // $("#subHead1").select2();
                     }
                 });
         }
+
         function QuantityCheckBox(){
             var checkbox = document.getElementById("chkQuantity");
             var quantityElement = $("#quantity");
@@ -459,6 +464,21 @@
             }
             $("#inputQuantity").val("");
             $("#inputRate").val("");
+
+        }
+
+        function SubHeadCheckBox(){
+            var checkbox = document.getElementById("chkSubHead");
+            var subHeadElement = $("#dsubHead");
+
+            if (checkbox.checked) {
+                subHeadElement.removeClass("d-none");
+                $("#subHead").prop("readonly", false);
+            } else {
+                subHeadElement.addClass("d-none");
+                $("#subHead").prop("readonly", true);
+            }
+            $("#subHead").val("");
 
         }
 

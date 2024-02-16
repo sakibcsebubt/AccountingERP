@@ -30,7 +30,7 @@
 
         public static void ConnectApi()
         {
-            AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://aspnetbd-001-site7.ftempurl.com/api/");
+            AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://localhost:5063/api/");
             //AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://localhost:5063/api/");
             AppBasicInfo.GerpApiClient.DefaultRequestHeaders.Accept.Clear();
             AppBasicInfo.GerpApiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));

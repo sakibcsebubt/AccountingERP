@@ -29,8 +29,6 @@ namespace MVC.ERPWEB.Controllers
                 ActcodeList = await CommonHelper.GetAccountCodeBookList();
         }
 
-
-
         public IActionResult Index()
         {
             return View();
@@ -284,7 +282,7 @@ namespace MVC.ERPWEB.Controllers
                         ListVouTable.Add(new ()
                         {
                             trnsl = ListVouTable.Count() + 1,
-                            DrCrOrder = (vType1.Substring(0, 1) == "R" ? "01" : "02"), // (vType1.Substring(1, 1) == "C" ? "01" : "02"),
+                            DrCrOrder = (vType1.Substring(0, 1) == "CP" ? "01" : "02"), // (vType1.Substring(1, 1) == "C" ? "01" : "02"),
                             cactcode = cactcode1,
                             sectcod = "000000000000",
                             actcode = "000000000000",
@@ -335,10 +333,10 @@ namespace MVC.ERPWEB.Controllers
                     trnam = trnamt1,
                     trnrmrk = rmrk1
                 });
-                return Json(ListVouTable);
                 //  this.lblSlNo.Content = "xxx";
                 //  this.CleanupControls2();
                 this.CalculateTotal(cmbVouType);
+                return Json(ListVouTable); 
                 //  this.txtActCode.Focus();
             }
             catch (Exception exp)

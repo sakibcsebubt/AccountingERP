@@ -30,7 +30,7 @@
 
         public static void ConnectApi()
         {
-            AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://localhost:5063/api/");
+            AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://127.0.0.1:5063/api/");
             //AppBasicInfo.GerpApiClient.BaseAddress = new Uri("http://localhost:5063/api/");
             AppBasicInfo.GerpApiClient.DefaultRequestHeaders.Accept.Clear();
             AppBasicInfo.GerpApiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));

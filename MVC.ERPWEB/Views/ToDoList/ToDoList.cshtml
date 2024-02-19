@@ -42,40 +42,40 @@
             <tbody>
                 @{
                     var sl = 0;
-                    if (Model.TaskList == null)
+                    @if (Model.TaskList == null)
                     {
-                                <tr>
-                                    <td class="text-danger text-center" colspan="14"> No Data Found!</td>
-                                </tr>
+                        <tr>
+                            <td class="text-danger text-center" colspan="14"> No Data Found!</td>
+                        </tr>
                     }
                     else
                     {
-                                @foreach (var item in Model.TaskList)
+                        @foreach (var item in Model.TaskList)
                         {
                             sl = sl + 1;
-                                    <tr>
-                                        <td>@sl</td>
-                                        <td>@item.ProjectName</td>
-                                        <td>@item.TaskName</td>
-                                        <td>@(item.ParentTaskId == -1 ? "" : item.ParentTaskId)</td>
-                                        <td>@item.UserName</td>
-                                        <td>@item.Designation</td>
-                                        <td>@item.ExpectedTime</td>
-                                        <td>@item.WorkingTime</td>
-                                        <td>@item.AssignDate</td>
-                                        <td>@item.DueDate</td>
-                                        <td>@item.CreatedBy</td>
-                                        <td>@(item.WorkingStatusId == 1 ? "Assigned" : "Done")</td>
-                                        <td>@(item.PriorityId == 1 ? "Normal" : "High")</td>
-                                        @*<td><a href="#" class=""><i class='fa fa-edit ml-2'> </i> </a> <i class='fa fa-trash ml-2'> </i></td>*@
-                                        <td>
-                                            <a href="#" class="edit-task" data-toggle="modal" data-target="#editTaskModal" data-task-id="@item.Id">
-                                                <i class='fa fa-edit ml-2'></i>
-                                            </a>
-                                            <i class='fa fa-trash ml-2'></i>
-                                        </td>
+                            <tr>
+                                <td>@sl</td>
+                                <td>@item.ProjectName</td>
+                                <td>@item.TaskName</td>
+                                <td>@(item.ParentTaskId == -1 ? "" : item.ParentTaskId)</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Designation</td>
+                                <td>@item.ExpectedTime</td>
+                                <td>@item.WorkingTime</td>
+                                <td>@item.AssignDate</td>
+                                <td>@item.DueDate</td>
+                                <td>@item.CreatedBy</td>
+                                <td>@(item.WorkingStatusId == 1 ? "Assigned" : "Done")</td>
+                                <td>@(item.PriorityId == 1 ? "Normal" : "High")</td>
+                                @*<td><a href="#" class=""><i class='fa fa-edit ml-2'> </i> </a> <i class='fa fa-trash ml-2'> </i></td>*@
+                                <td>
+                                    <a href="#" class="edit-task" data-toggle="modal" data-target="#editTaskModal" data-task-id="@item.Id">
+                                        <i class='fa fa-edit ml-2'></i>
+                                    </a>
+                                    <i class='fa fa-trash ml-2'></i>
+                                </td>
 
-                                    </tr>
+                            </tr>
                         }
                     }
                 }
@@ -188,7 +188,7 @@
                 type: 'GET',
                 success: function (data) {
                     // Populate modal form controls with data
-                    var status = data == "CreteNewTask" ? "Create" : "Edit"; 
+                    var status = data == "CreteNewTask" ? "Create" : "Edit";
                     $('#editTaskModalLabel').text(status + ' Task');
                     console.log("Task Data:", data);
                     $('#Id').val(data[0].id);

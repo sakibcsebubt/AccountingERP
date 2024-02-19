@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
         <div class="collapse" id="collapse-basic-input-group">
-        </div> 
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group mb-3">
@@ -17,7 +17,7 @@
                         @foreach (var VType in Model.VoucherList)
                         {
                             <option value="@VType.Code">@VType.Name</option>
-                        } 
+                        }
                     </select>
                 </div>
             </div>
@@ -26,10 +26,13 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text text-dark" for="branch">Branch </label>
                     </div>
-                    <select class="custom-select" id="vcrAdvice"> 
-                        @foreach (var VType in Model.BranchList)
+                    <select class="custom-select" id="vcrAdvice">
+                        @if (Model.BranchList != null)
                         {
-                            <option value="@VType.Sectid">@VType.Sectsdesc</option>
+                            @foreach (var VType in Model.BranchList)
+                            {
+                                <option value="@VType.Sectid">@VType.Sectsdesc</option>
+                            }
                         }
                     </select>
                 </div>
@@ -112,7 +115,7 @@
                             <label class="input-group-text text-dark" for="sourceCash">Source Cash </label>
                         </div>
                         <select class="custom-select" id="sourceCash">
-                            <option selected>Choose...</option> 
+                            <option selected>Choose...</option>
                         </select>
                     </div>
                 </div>
@@ -168,9 +171,9 @@
                                 </div>
                                 <select class="custom-select" id="subHead">
                                     @* <option selected>Choose...</option> *@
-                                  @*   @foreach (var item in Model.EntAccountCodeBook)
+                                    @*   @foreach (var item in Model.EntAccountCodeBook)
                                     {
-                                        <option value="@item.Accid">@item.AcHead</option>
+                                    <option value="@item.Accid">@item.AcHead</option>
                                     } *@
                                 </select>
                             </div>
@@ -180,7 +183,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="input-group mb-3 d-none" id="quantity" >
+                            <div class="input-group mb-3 d-none" id="quantity">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text text-dark" for="quantity">Quantity </label>
                                 </div>
@@ -198,29 +201,29 @@
                     </div>
                 </div>
             </div>
-         @*    <div class="row">
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-10">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text text-dark" for="subHead2">Sub Head-2 </label>
-                                </div>
-                                <select class="custom-select" id="subHead2">
-                                    <option selected>Choose...</option>
-                                    @foreach (var item in Model.EntAccountCodeBook)
-                                    {
-                                        <option value="@item.Accid">@item.AcHead</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                
-                </div>
+            @*    <div class="row">
+            <div class="col-md-8">
+            <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <label class="input-group-text text-dark" for="subHead2">Sub Head-2 </label>
+            </div>
+            <select class="custom-select" id="subHead2">
+            <option selected>Choose...</option>
+            @foreach (var item in Model.EntAccountCodeBook)
+            {
+            <option value="@item.Accid">@item.AcHead</option>
+            }
+            </select>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
             </div> *@
 
             <div class="row">
@@ -237,8 +240,8 @@
                             </div>
 
                             @* <div class="custom-control custom-checkbox d-inline-block mr-3">
-                                <input type="checkbox" class="custom-control-input" id="ChkSubHead2">
-                                <label class="custom-control-label" for="ChkSubHead2">Sub Head-2</label> 
+                            <input type="checkbox" class="custom-control-input" id="ChkSubHead2">
+                            <label class="custom-control-label" for="ChkSubHead2">Sub Head-2</label>
                             </div> *@
                         </div>
                         <div class="col-md-6">
@@ -304,7 +307,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                         @*        <td>1.</td>
+                                @*        <td>1.</td>
                                 <td>Account Code Head</td>
                                 <td>Ho-Head</td>
                                 <td>12</td>
@@ -319,7 +322,7 @@
 
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 
@@ -386,7 +389,7 @@
         });
     </script>
     <script>
-        document.getElementById("okButton").addEventListener("click", function () { 
+        document.getElementById("okButton").addEventListener("click", function () {
             // Toggle the visibility of the element
             var element = document.getElementById("parttwo");
             element.classList.toggle("d-none");
@@ -406,7 +409,7 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log('Select Changes Restult: ', data); 
+                        console.log('Select Changes Restult: ', data);
                         if (data == "true") {
                             // var subHeadElement = $("#dsubHead");
                             $("#dsubHead").removeClass("d-none");
@@ -416,10 +419,10 @@
                             // $(".colSubHead").removeClass("d-none");
                             getItemSirdesc();
                         } else {
-                            $("#dsubHead").addClass("d-none"); 
-                            $("#subHead").prop("readonly", true); 
+                            $("#dsubHead").addClass("d-none");
+                            $("#subHead").prop("readonly", true);
                             $("#subHead").text("");
-                            $(".lblLevel2").text(""); 
+                            $(".lblLevel2").text("");
                             $("#chkSubHead").prop('checked', false);
 
                         }
@@ -435,7 +438,7 @@
                     url: "/Accounts/GetItemSirdesc", // Controller/View
                     dataType: 'json',
                     success: function (data) {
-                        console.log('GetSirItem Description: ',data);
+                        console.log('GetSirItem Description: ', data);
                         var options = "<option value='' selected disabled>-- Select Sub Head --</option>"
                         for (var i = 0; i < data.length; i++) {
                             options += "<option value='" + data[i].accid + "'>" + data[i].accid + ' - ' + data[i].acHead + "</option>"
@@ -446,7 +449,7 @@
                 });
         }
 
-        function QuantityCheckBox(){
+        function QuantityCheckBox() {
             var checkbox = document.getElementById("chkQuantity");
             var quantityElement = $("#quantity");
             var rateElement = $("#rate");
@@ -467,7 +470,7 @@
 
         }
 
-        function SubHeadCheckBox(){
+        function SubHeadCheckBox() {
             var checkbox = document.getElementById("chkSubHead");
             var subHeadElement = $("#dsubHead");
 
@@ -493,7 +496,7 @@
 
             var vcrcod = $("#voucherType").val();
             var brncod = $("#branch").val();
-           // alert(vcrcod + brncod);
+            // alert(vcrcod + brncod);
 
 
             var vcrAdvice = $("#vcrAdvice").val();
@@ -526,7 +529,7 @@
 
             // emptyValueCheck("vcrAmt", "Amount Field Can't be empty!!");
             // emptyValueCheck("actdesc", "Account Head Can't be empty!!");
-             
+
 
             // $("#btnUpdate1").prop("readonly", false);
             // $("#btnUpdate1").removeClass("d-none");
@@ -569,7 +572,7 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log(data,'Voucher Table Data ');
+                        console.log(data, 'Voucher Table Data ');
                         // alert(1);
                         $("#tblAddedVoucher tbody").empty();
                         var z = 1;

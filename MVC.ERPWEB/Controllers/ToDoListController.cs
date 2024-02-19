@@ -31,13 +31,13 @@ namespace MVC.ERPWEB.Controllers
             {
                 var pap1 = new ApiAccessParms
                 { 
-                    ProcName = "dbo.GetUserWiseToDoList",
+                    ProcName = "GetUserWiseToDoList",
                     ProcID = "GetTodoTaskListbyUserId",
                     parm01 = UserId.ToString()
                 };
                 string JsonDs1a = await WebProcessAccess.GetGerpAppJsonData(pap1, dbName);
                 if (JsonDs1a == null)
-                    return View();
+                    return View(model);
 
                  model.TaskList = AppCustomFunctions.JsonStringToList<TodoTaskModel>(JsonDs1a, "Table");
 
